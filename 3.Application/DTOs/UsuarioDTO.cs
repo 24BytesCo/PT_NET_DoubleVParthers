@@ -4,7 +4,7 @@
     {
         public Guid Identificador { get; set; }
 
-        public string? UserName { get; set; }
+        public string? NombreUsuario { get; set; }
 
         public DateTime FechaCreacion { get; set; }
     }

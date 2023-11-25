@@ -1,7 +1,9 @@
 using _2.Infraestructure;
 using _2.Infraestructure.Persistence;
 using _3.Application;
+using _3.Application.Features.Usuarios.Queries.ObtenerListaUsuarios;
 using _4.Domain;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -42,6 +44,7 @@ builder.Services.AddDbContext<PTDbContext>(options =>
     b => b.MigrationsAssembly(typeof(PTDbContext).Assembly.FullName)
     )
 );
+builder.Services.AddMediatR(typeof(ObtenerListaUsuariosQuery).Assembly);
 
 // Agregando controladores y configuración de Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();

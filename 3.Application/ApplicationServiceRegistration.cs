@@ -1,3 +1,4 @@
+using _3.Application.Mapping;
 using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -13,12 +14,13 @@ namespace _3.Application
                             IConfiguration configuration
         )
         {
-            //var mapperConfig = new MapperConfiguration(mc => {
-            //    mc.AddProfile(new MappingProfile());
-            //});
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
 
-            //IMapper mapper = mapperConfig.CreateMapper();
-            //services.AddSingleton(mapper);
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
