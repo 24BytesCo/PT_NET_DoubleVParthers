@@ -1,3 +1,4 @@
+using _1.Api.Middleware;
 using _2.Infraestructure;
 using _2.Infraestructure.Persistence;
 using _3.Application;
@@ -76,6 +77,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
 // Configuración de CORS (Cross-Origin Resource Sharing)
 builder.Services.AddCors(options =>
 {
@@ -87,13 +89,14 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

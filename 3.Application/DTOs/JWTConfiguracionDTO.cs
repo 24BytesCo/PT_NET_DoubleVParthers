@@ -11,6 +11,6 @@
 
         public double DuracionMinutos { get; set; }
 
-        public TimeSpan TiempoEspiracion { get; set; }
+        public TimeSpan ExpireTime { get; set; }
     }
 }

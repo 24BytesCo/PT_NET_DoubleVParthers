@@ -23,25 +23,39 @@ namespace _2.Infraestructure.Services.Auth
 
         public string CrearToken(Usuario usuario)
         {
-            var claims = new List<Claim> {
-            new Claim(JwtRegisteredClaimNames.NameId, usuario.UserName!),
-            new Claim("userId", usuario.Identificador.ToString()),
-            new Claim("fechaCreacion", usuario.FechaCreacion.ToString()!)
-        };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key!));
-            var credenciales = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescription = new SecurityTokenDescriptor
+            try
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.Add(_jwtSettings.TiempoEspiracion),
-                SigningCredentials = credenciales
-            };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(tokenDescription);
-            return tokenHandler.WriteToken(token);
+                var claims = new List<Claim>
+                {
+                        new Claim(JwtRegisteredClaimNames.NameId, usuario.UserName!),
+                        new Claim("userId", usuario.Identificador.ToString()),
+                        new Claim("fechaCreacion", usuario.FechaCreacion.ToString()!)
+                };
+
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key!));
+                var credenciales = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+                //var expireTimeSpan = TimeSpan.Parse(_jwtSettings.ExpireTime);
+
+                var tokenDescription = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(claims),
+                    Expires = DateTime.UtcNow.Add(_jwtSettings.ExpireTime),
+                    SigningCredentials = credenciales
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var token = tokenHandler.CreateToken(tokenDescription);
+                return tokenHandler.WriteToken(token);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al crear el token: "+ ex);
+            }
+
+
         }
 
         public string ObtenerSesionUsuario()

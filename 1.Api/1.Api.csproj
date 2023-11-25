@@ -7,10 +7,6 @@
     <RootNamespace>_1.Api</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
