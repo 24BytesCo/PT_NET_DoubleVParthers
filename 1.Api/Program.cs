@@ -106,8 +106,10 @@ using (var scope = app.Services.CreateScope())
     {
         var context = service.GetRequiredService<PTDbContext>();
         var usuarioManager = service.GetRequiredService<UserManager<Usuario>>();
-        var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
         await context.Database.MigrateAsync();
+        //Creando un usuario inicial si  no existe uno.
+        await PTDbContextData.CrearUsuarioInicialAsync(usuarioManager, loggerFactory);
+
     }
     catch (Exception ex)
     {
