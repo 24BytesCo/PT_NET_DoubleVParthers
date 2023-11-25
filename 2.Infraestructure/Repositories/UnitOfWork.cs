@@ -10,9 +10,9 @@ namespace _2.Infraestructure.Repositories
     {
         private Hashtable? _repositories;
 
-        private readonly DbContext _context;
+        private readonly PTDbContext _context;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(PTDbContext context)
         {
             _context = context;
         }

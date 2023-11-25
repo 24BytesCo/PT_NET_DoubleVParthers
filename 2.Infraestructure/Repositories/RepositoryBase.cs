@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using _3.Application.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +28,7 @@ namespace _2.Infraestructure.Repositories
         {
             return await _context.Set<T>().ToListAsync();
         }
-       
+
         public async Task<T> GetByIdAsync(int id)
         {
             return (await _context.Set<T>().FindAsync(id))!;

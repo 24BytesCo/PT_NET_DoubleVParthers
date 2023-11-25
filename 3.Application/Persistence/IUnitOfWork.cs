@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _3.Application.Persistence
+﻿namespace _3.Application.Persistence
 {
-    public interface IUnitOfWork: IDisposable
+    public interface IUnitOfWork : IDisposable
     {
-        IAsyncRepository<TEntity> Repository<TEntity> () where TEntity : class;
+        IAsyncRepository<TEntity> Repository<TEntity>() where TEntity : class;
 
         Task<int> Complete();
     }
