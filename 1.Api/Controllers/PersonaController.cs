@@ -12,18 +12,18 @@ namespace _1.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class UsuarioController : ControllerBase
+    public class PersonaController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public UsuarioController(IMediator mediator)
+        public PersonaController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpGet("list", Name = "ObtenerListaUsuarios")]
+        [HttpGet("list", Name = "ObtenerListaPersonas")]
         [ProducesResponseType(typeof(IReadOnlyList<UsuarioDTO>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IReadOnlyList<UsuarioDTO>>> ObtenerListaUsuarios() 
+        public async Task<ActionResult<IReadOnlyList<UsuarioDTO>>> ObtenerListaPersonas() 
         {
             var query = new ObtenerListaUsuariosQuery();
 
@@ -32,21 +32,12 @@ namespace _1.Api.Controllers
             return Ok(todosUsuarios);
         }
 
-        [HttpPost("crearUsuario", Name = "CrearUsuario")]
+        [HttpPost("crearPersona", Name = "CrearPersona")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<AuthDTO>> CrearUsuario([FromBody] CrearUsuarioCommand request)
+        public async Task<ActionResult<AuthDTO>> CrearPersona([FromBody] CrearUsuarioCommand request)
         {
             return await _mediator.Send(request);
         }
-
-        [AllowAnonymous]
-        [HttpPost("login", Name = "Login")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<AuthDTO>> Login([FromBody] LoginUsuarioCommand request)
-        {
-            return await _mediator.Send(request);
-        }
-
 
     }
 }

@@ -53,7 +53,16 @@ namespace _3.Application.Features.Usuarios.Commands.CrearUsuario
                     };
                 }
 
-                throw new Exception("No se pudo crear el usuario");
+                var errores = "";
+                var letra = 'A';
+
+                foreach (var item in creandoUsuario.Errors)
+                {
+                    errores += $"{letra}. {item.Description}  |  ";
+                    letra++;
+                }
+
+                throw new Exception($"{errores.TrimEnd('|', ' ')}");
             }
             catch (Exception ex)
             {
