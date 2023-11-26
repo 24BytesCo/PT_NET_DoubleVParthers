@@ -1,4 +1,5 @@
 using _3.Application.Persistence;
+using _4.Domain;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -12,6 +13,12 @@ namespace _2.Infraestructure.Repositories
         {
             _context = context;
         }
+
+        public Task<IReadOnlyList<T>> ObtenerTodasPersonas() 
+        {
+            return Task.FromResult<IReadOnlyList<T>>(_context.Set<T>().FromSqlInterpolated($"EXEC ObtenerTodasPersonas").ToList());
+        }
+        
 
         public async Task<T> AddAsync(T entity)
         {

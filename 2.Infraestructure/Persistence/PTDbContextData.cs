@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using System.Data;
 
@@ -11,14 +12,21 @@ namespace _2.Infraestructure.Persistence
     {
         public static async Task CrearUsuarioInicialAsync(
         UserManager<Usuario> usuarioManager,
-        ILoggerFactory loggerFactory
+        ILoggerFactory loggerFactory,
+        PTDbContext context
 
         )
         {
             try
             {
+                
                 if (!usuarioManager.Users.Any())
                 {
+                    //Creando procedimiento almacenado solicitado
+                    string sql = @"CREATE PROCEDURE ObtenerTodasPersonas AS BEGIN SET NOCOUNT ON; SELECT * FROM Personas; END;";
+                    context.Database.ExecuteSqlRaw(sql);
+
+
                     Guid idUsuario = Guid.NewGuid();
                     var usuarioAdmin = new Usuario
                     {

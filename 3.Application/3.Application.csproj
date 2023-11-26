@@ -33,8 +33,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\4.Domain\4.Domain.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Features\Personas\Queries\" />
-	</ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using _3.Application.DTOs;
 using _3.Application.Features.Auth.Commands.Login;
 using _3.Application.Features.Personas.Commands.CrearPersona;
+using _3.Application.Features.Personas.Queries.ConsultarTodasPersonas;
 using _3.Application.Features.Usuarios.Commands.CrearUsuario;
 using _3.Application.Features.Usuarios.Queries.ObtenerListaUsuarios;
 using _4.Domain;
@@ -26,7 +27,7 @@ namespace _1.Api.Controllers
         [ProducesResponseType(typeof(IReadOnlyList<Persona>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IReadOnlyList<Persona>>> ObtenerListaPersonas() 
         {
-            var query = new ObtenerListaUsuariosQuery();
+            var query = new ObtenerTodasPersonasQuery();
 
             var todosUsuarios = await _mediator.Send(query);
 

@@ -111,7 +111,7 @@ using (var scope = app.Services.CreateScope())
         var usuarioManager = service.GetRequiredService<UserManager<Usuario>>();
         await context.Database.MigrateAsync();
         //Creando un usuario inicial si  no existe uno.
-        await PTDbContextData.CrearUsuarioInicialAsync(usuarioManager, loggerFactory);
+        await PTDbContextData.CrearUsuarioInicialAsync(usuarioManager, loggerFactory, context);
 
     }
     catch (Exception ex)
