@@ -1,5 +1,6 @@
 ﻿using _3.Application.DTOs;
 using _3.Application.Features.Auth.Commands.Login;
+using _3.Application.Features.Personas.Commands.CrearPersona;
 using _3.Application.Features.Usuarios.Commands.CrearUsuario;
 using _3.Application.Features.Usuarios.Queries.ObtenerListaUsuarios;
 using _4.Domain;
@@ -22,8 +23,8 @@ namespace _1.Api.Controllers
         }
 
         [HttpGet("list", Name = "ObtenerListaPersonas")]
-        [ProducesResponseType(typeof(IReadOnlyList<UsuarioDTO>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IReadOnlyList<UsuarioDTO>>> ObtenerListaPersonas() 
+        [ProducesResponseType(typeof(IReadOnlyList<Persona>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IReadOnlyList<Persona>>> ObtenerListaPersonas() 
         {
             var query = new ObtenerListaUsuariosQuery();
 
@@ -34,7 +35,7 @@ namespace _1.Api.Controllers
 
         [HttpPost("crearPersona", Name = "CrearPersona")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<AuthDTO>> CrearPersona([FromBody] CrearUsuarioCommand request)
+        public async Task<ActionResult<Persona>> CrearPersona([FromBody] CrearPersonaCommand request)
         {
             return await _mediator.Send(request);
         }
