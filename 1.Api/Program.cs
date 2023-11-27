@@ -81,14 +81,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Configuración de CORS (Cross-Origin Resource Sharing)
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()
+    options.AddPolicy("CorsPolicy", builder => builder
+        .WithOrigins("http://localhost:4200")
         .AllowAnyMethod()
         .AllowAnyHeader()
+        .AllowAnyOrigin()
     );
 });
 
 var app = builder.Build();
 
+app.UseCors("CorsPolicy");
 app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
