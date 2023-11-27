@@ -1,5 +1,8 @@
 **Proyecto con Autenticación, CRUD y Funcionalidades Avanzadas**
 
+Ver video funcional del proyecto Completo:
+https://www.youtube.com/watch?v=GyexNSs3rxA
+
 ---
 
 ### Descripción del Proyecto
